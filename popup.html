@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  :root { color-scheme: dark; }
+  html, body { width: 100%; height: 100vh; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; flex-direction: column; background: #0f0f0f; color: #e5e5e5; font-size: 13px; line-height: 1.5; overflow: hidden; }
+  #header { padding: 10px 14px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; }
+  #header h3 { margin: 0; font-size: 13px; font-weight: 600; }
+  .header-btns { display: flex; gap: 6px; }
+  .hbtn { background: none; border: 1px solid #333; color: #aaa; padding: 4px 9px; cursor: pointer; border-radius: 4px; font-size: 11px; }
+  .hbtn:hover { background: #222; color: #fff; }
+
+  #chat { flex: 1; overflow-y: auto; padding: 12px; scroll-behavior: smooth; }
+  .msg { margin-bottom: 14px; padding: 10px 13px; border-radius: 10px; word-break: break-word; font-size: 12.5px; }
+  .user { background: #1e40af; color: #fff; margin-left: 30px; border-bottom-right-radius: 3px; white-space: pre-wrap; }
+  .assistant { background: #1f1f1f; border: 1px solid #2a2a2a; margin-right: 30px; border-bottom-left-radius: 3px; }
+  .error { background: #3f1515; border-color: #7f1d1d; color: #fca5a5; }
+  .tool-status { font-size: 11px; color: #60a5fa; padding: 4px 13px; margin: 0 30px 6px 0; font-style: italic; display: flex; align-items: center; gap: 8px; }
+  .tool-status .spinner { width: 9px; height: 9px; border: 2px solid #60a5fa; border-top-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; flex-shrink: 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .tool-done { font-size: 10.5px; color: #666; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #333; line-height: 1.45; }
+  .tool-done .ok { color: #4ade80; }
+  .tool-done .fail { color: #f87171; }
+
+  .assistant > :first-child { margin-top: 0; }
+  .assistant > :last-child { margin-bottom: 0; }
+  .assistant p { margin: 0 0 8px; }
+  .assistant h1, .assistant h2, .assistant h3, .assistant h4 { margin: 10px 0 6px; font-weight: 600; line-height: 1.3; }
+  .assistant h1 { font-size: 15px; }
+  .assistant h2 { font-size: 14px; color: #f3f4f6; }
+  .assistant h3 { font-size: 13px; color: #93c5fd; }
+  .assistant h4 { font-size: 12.5px; color: #fbbf24; }
+  .assistant strong { color: #fff; font-weight: 600; }
+  .assistant em { color: #fcd34d; font-style: italic; }
+  .assistant code { background: #2a2a2a; padding: 1px 5px; border-radius: 3px; font-size: 11.5px; font-family: 'SF Mono', Menlo, monospace; color: #86efac; }
+  .assistant pre { background: #000; padding: 8px; border-radius: 6px; margin: 6px 0; overflow-x: auto; }
+  .assistant pre code { background: none; padding: 0; color: #d4d4d4; }
+  .assistant ul, .assistant ol { margin: 6px 0; padding-left: 22px; }
+  .assistant li { margin: 3px 0; }
+  .assistant .table-wrap { overflow-x: auto; margin: 10px 0; border-radius: 6px; border: 1px solid #2a2a2a; }
+  .assistant table { border-collapse: separate; border-spacing: 0; font-size: 12px; width: 100%; line-height: 1.55; }
+  .assistant th, .assistant td { padding: 9px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid #2a2a2a; white-space: normal; }
+  .assistant th:not(:last-child), .assistant td:not(:last-child) { border-right: 1px solid #2a2a2a; }
+  .assistant tr:last-child td { border-bottom: none; }
+  .assistant th { background: #242424; color: #fbbf24; font-weight: 600; font-size: 11.5px; letter-spacing: .02em; text-transform: uppercase; }
+  .assistant td { background: #161616; }
+  .assistant tr:hover td { background: #1c1c1c; }
+  .assistant blockquote { border-left: 3px solid #3b82f6; padding-left: 10px; margin: 8px 0; color: #bbb; }
+  .assistant a { color: #60a5fa; text-decoration: none; }
+  .assistant hr { border: none; border-top: 1px solid #333; margin: 10px 0; }
+
+  #input-row { padding: 10px; border-top: 1px solid #222; display: flex; gap: 6px; background: #1a1a1a; }
+  #input { flex: 1; padding: 8px 10px; background: #0f0f0f; border: 1px solid #2a2a2a; color: #fff; border-radius: 6px; font-size: 12.5px; font-family: inherit; }
+  #input:focus { outline: none; border-color: #3b82f6; }
+  #send { padding: 8px 14px; background: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: 500; }
+  #send:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+  #settings { display: none; padding: 12px; background: #141414; border-bottom: 1px solid #222; }
+  #settings.show { display: block; }
+  #settings label { font-size: 11.5px; display: block; margin-bottom: 4px; color: #aaa; }
+  #settings input { width: 100%; padding: 7px; background: #0f0f0f; border: 1px solid #2a2a2a; color: #fff; border-radius: 4px; margin-bottom: 8px; box-sizing: border-box; font-size: 12px; }
+  #save-key { padding: 6px 12px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 11.5px; }
+
+  .empty-state { text-align: center; padding: 40px 20px; color: #555; font-size: 12px; }
+</style>
+</head>
+<body>
+  <div id="header">
+    <h3>TV Agent</h3>
+    <div class="header-btns">
+      <button id="lang-btn" class="hbtn" data-i18n-title="tooltip_lang">中/EN</button>
+      <button id="clear-btn" class="hbtn" data-i18n-title="tooltip_clear" data-i18n="btn_clear">Clear</button>
+      <button id="settings-btn" class="hbtn" data-i18n="btn_settings">Settings</button>
+    </div>
+  </div>
+
+  <div id="settings">
+    <label data-i18n="label_api_key">OpenAI API Key:</label>
+    <input id="api-key" type="password" placeholder="sk-...">
+    <button id="save-key" data-i18n="btn_save">Save</button>
+  </div>
+
+  <div id="chat"></div>
+
+  <div id="input-row">
+    <input id="input" data-i18n-placeholder="placeholder_input" />
+    <button id="send" data-i18n="btn_send">Send</button>
+  </div>
+
+<script src="popup.js"></script>
+</body>
+</html>

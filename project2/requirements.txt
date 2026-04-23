@@ -1,0 +1,8 @@
+numpy>=1.26
+opencv-python>=4.9
+scikit-learn>=1.4
+Pillow>=10.2
+openai>=1.40
+pandas>=2.2
+matplotlib>=3.8
+pyyaml>=6.0

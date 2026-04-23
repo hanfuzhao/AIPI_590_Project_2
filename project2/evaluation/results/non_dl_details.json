@@ -1,0 +1,250 @@
+[
+  {
+    "case_id": "test_001",
+    "agent": "non_dl",
+    "level_metrics": {
+      "tp": 2,
+      "fp": 6,
+      "fn": 0
+    },
+    "plan_metrics": {
+      "has_plan": true,
+      "side": "long",
+      "risk_reward": 20.815602836879506,
+      "meets_min_rr": true,
+      "backtest_outcome": "loss",
+      "bars_to_outcome": 25
+    },
+    "perception": {
+      "levels": [
+        {
+          "price": 119.06805555555557,
+          "role": "support",
+          "strength": 17.0
+        },
+        {
+          "price": 100.76944444444445,
+          "role": "support",
+          "strength": 13.0
+        },
+        {
+          "price": 119.72465277777776,
+          "role": "resistance",
+          "strength": 12.0
+        },
+        {
+          "price": 99.72534722222223,
+          "role": "support",
+          "strength": 12.0
+        },
+        {
+          "price": 101.07944444444445,
+          "role": "resistance",
+          "strength": 10.0
+        },
+        {
+          "price": 101.5875,
+          "role": "resistance",
+          "strength": 4.0
+        },
+        {
+          "price": 102.35173611111111,
+          "role": "resistance",
+          "strength": 4.0
+        },
+        {
+          "price": 110.02638888888889,
+          "role": "resistance",
+          "strength": 4.0
+        }
+      ],
+      "current_price": 118.42222222222222,
+      "trend": "up",
+      "volatility_atr": 1.821249999999998,
+      "raw": {
+        "pivot_high_count": 42,
+        "pivot_low_count": 52,
+        "resistance_clusters": 10,
+        "support_clusters": 7
+      },
+      "_latency_s": 0.042
+    },
+    "plan": {
+      "side": "long",
+      "entry": 100.76944444444445,
+      "stop": 99.85881944444445,
+      "targets": [
+        119.72465277777776
+      ],
+      "rationale": "buy pullback at nearest support 100.7694 (strength=13.0); target next resistance 119.7247; trend=up",
+      "risk_reward": 20.815602836879506
+    },
+    "error": null
+  },
+  {
+    "case_id": "test_002",
+    "agent": "non_dl",
+    "level_metrics": {
+      "tp": 2,
+      "fp": 6,
+      "fn": 0
+    },
+    "plan_metrics": {
+      "has_plan": true,
+      "side": "long",
+      "risk_reward": 21.13523809523808,
+      "meets_min_rr": true,
+      "backtest_outcome": "not_filled",
+      "bars_to_outcome": null
+    },
+    "perception": {
+      "levels": [
+        {
+          "price": 60.200822368421065,
+          "role": "resistance",
+          "strength": 19.0
+        },
+        {
+          "price": 44.79801136363636,
+          "role": "support",
+          "strength": 11.0
+        },
+        {
+          "price": 45.35625000000001,
+          "role": "support",
+          "strength": 9.0
+        },
+        {
+          "price": 58.673437500000006,
+          "role": "support",
+          "strength": 6.0
+        },
+        {
+          "price": 45.822656249999994,
+          "role": "resistance",
+          "strength": 4.0
+        },
+        {
+          "price": 58.359375,
+          "role": "resistance",
+          "strength": 3.0
+        },
+        {
+          "price": 45.6046875,
+          "role": "resistance",
+          "strength": 2.0
+        },
+        {
+          "price": 46.125,
+          "role": "resistance",
+          "strength": 2.0
+        }
+      ],
+      "current_price": 57.6984375,
+      "trend": "up",
+      "volatility_atr": 1.2304687499999996,
+      "raw": {
+        "pivot_high_count": 42,
+        "pivot_low_count": 34,
+        "resistance_clusters": 13,
+        "support_clusters": 8
+      },
+      "_latency_s": 0.029
+    },
+    "plan": {
+      "side": "long",
+      "entry": 45.35625000000001,
+      "stop": 44.74101562500001,
+      "targets": [
+        58.359375,
+        60.200822368421065
+      ],
+      "rationale": "buy pullback at nearest support 45.3563 (strength=9.0); target next resistance 58.3594; trend=up",
+      "risk_reward": 21.13523809523808
+    },
+    "error": null
+  },
+  {
+    "case_id": "test_003",
+    "agent": "non_dl",
+    "level_metrics": {
+      "tp": 2,
+      "fp": 6,
+      "fn": 0
+    },
+    "plan_metrics": {
+      "has_plan": true,
+      "side": "long",
+      "risk_reward": 19.732110091743234,
+      "meets_min_rr": true,
+      "backtest_outcome": "loss",
+      "bars_to_outcome": 22
+    },
+    "perception": {
+      "levels": [
+        {
+          "price": 2492.2423611111108,
+          "role": "support",
+          "strength": 10.0
+        },
+        {
+          "price": 2562.765625,
+          "role": "support",
+          "strength": 8.0
+        },
+        {
+          "price": 3158.309523809524,
+          "role": "support",
+          "strength": 7.0
+        },
+        {
+          "price": 3175.7685185185187,
+          "role": "resistance",
+          "strength": 6.0
+        },
+        {
+          "price": 2508.1574074074074,
+          "role": "support",
+          "strength": 6.0
+        },
+        {
+          "price": 3198.8430555555556,
+          "role": "resistance",
+          "strength": 5.0
+        },
+        {
+          "price": 2537.114583333333,
+          "role": "resistance",
+          "strength": 4.0
+        },
+        {
+          "price": 2581.1203703703704,
+          "role": "resistance",
+          "strength": 3.0
+        }
+      ],
+      "current_price": 3134.2708333333335,
+      "trend": "up",
+      "volatility_atr": 62.13252314814816,
+      "raw": {
+        "pivot_high_count": 25,
+        "pivot_low_count": 40,
+        "resistance_clusters": 10,
+        "support_clusters": 9
+      },
+      "_latency_s": 0.028
+    },
+    "plan": {
+      "side": "long",
+      "entry": 2562.765625,
+      "stop": 2531.699363425926,
+      "targets": [
+        3175.7685185185187,
+        3198.8430555555556
+      ],
+      "rationale": "buy pullback at nearest support 2562.7656 (strength=8.0); target next resistance 3175.7685; trend=up",
+      "risk_reward": 19.732110091743234
+    },
+    "error": null
+  }
+]

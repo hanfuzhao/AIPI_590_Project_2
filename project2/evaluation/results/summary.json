@@ -1,0 +1,13 @@
+{
+  "non_dl": {
+    "agent": "non_dl",
+    "n_cases": 3,
+    "n_errors": 0,
+    "level_precision": 0.25,
+    "level_recall": 1.0,
+    "level_f1": 0.4,
+    "plan_rate": 1.0,
+    "win_rate": 0.0,
+    "avg_rr": 20.560983674620275
+  }
+}

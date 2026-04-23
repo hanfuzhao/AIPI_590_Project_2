@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "My TV Agent",
+  "version": "1.0",
+  "description": "AI-powered TradingView assistant using OpenAI API",
+  "permissions": ["storage", "activeTab", "scripting", "sidePanel"],
+  "host_permissions": [
+    "*://*.tradingview.com/*",
+    "https://api.openai.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.tradingview.com/chart/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "action": {
+    "default_title": "My TV Agent (点击打开侧边栏)"
+  }
+}
